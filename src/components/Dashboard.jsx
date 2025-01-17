@@ -23,7 +23,7 @@ function Dashboard() {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/submissions/${id}`, {
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/submissions/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchSubmissions();
@@ -42,7 +42,7 @@ function Dashboard() {
             <p>Handle: {submission.handle}</p>
             <div className="image-container">
               {submission.images.map((image, index) => (
-                <img key={index} src={`http://localhost:5000${image}`} alt={`Submission ${index + 1}`} />
+                <img key={index} src={`${process.env.REACT_APP_API_URL}${image}`} alt={`Submission ${index + 1}`} />
               ))}
             </div>
             <button onClick={() => handleDelete(submission._id)}>Delete</button>
